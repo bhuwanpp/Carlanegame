@@ -2,7 +2,13 @@ import './style.css'
 import { gameData, score } from './util'
 import { gameLoop, myCar } from './mycar'
 import { updateRoad } from './road'
-import { EnemyCar, highestScore } from './enemycar'
+import { enemyCar, highestScore } from './enemycar'
+
+// type for min max 
+type RandomNum = {
+    max: number,
+    min: number
+}
 
 // audio 
 import audio from '/sound/audio.mp3'
@@ -11,7 +17,7 @@ const gameStartAudio = new Audio(audio) as HTMLAudioElement
 export const canvas = document.getElementById('canvas') as HTMLCanvasElement
 export const ctx = canvas.getContext('2d')!
 
-export function random(max: number, min: number): number {
+export function random({ max, min }: RandomNum): number {
     let num: number = Math.floor(Math.random() * (max - min) + min)
     return num
 }
@@ -30,9 +36,13 @@ function allUpdate() {
     ctx.fillText(`Score ${score.score}`, 10, 20)
 
     updateRoad()
-    myCar.DrawCar()
-    EnemyCar()
+    // mycar
+    myCar.drawCar()
     gameLoop()
+
+    // enemy car 
+    enemyCar()
+
 
     if (gameData.gameOver) {
         cancelAnimationFrame(animationId)
@@ -45,12 +55,9 @@ function allUpdate() {
                 location.reload()
             }
         })
-
-
     }
 
 }
-
 
 function gameOverText() {
     if (gameData.gameOver) {
@@ -67,7 +74,7 @@ function gameOverText() {
 }
 
 
-function StartGame() {
+function startGame() {
     ctx.fillStyle = 'red'
     ctx.font = '30px Tiny5'
     ctx.fillText('Start Your game', 100, canvas.height / 2)
@@ -86,7 +93,7 @@ function StartGame() {
     })
 
 }
-StartGame()
+startGame()
 
 
 

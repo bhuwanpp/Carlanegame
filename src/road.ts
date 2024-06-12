@@ -27,7 +27,7 @@ export class Road {
 
 
 const roads: Road[] = []
-function DrawRoad() {
+function drawRoad() {
     for (let i = 0; i < 8; i++) {
         let leftRoad = new Road(
             leftRoadX,
@@ -47,7 +47,7 @@ function DrawRoad() {
         roads.push(rightRoad)
     }
 }
-DrawRoad()
+drawRoad()
 
 export function updateRoad() {
     ctx.fillStyle = 'white'

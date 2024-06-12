@@ -1,6 +1,5 @@
 import { ctx } from "./main";
 import { carWidth, gameData, carHeight, ignoreNumber, canvasHeight, score } from "./util";
-import { random } from "./main";
 import { Car, myCar } from "./mycar";
 
 let enemyCar1 = new Image();
@@ -14,7 +13,6 @@ enemyCar3.src = "./images/taxi.png";
 
 let enemyCar4 = new Image();
 enemyCar4.src = "./images/Black_viper.png";
-
 
 let speedIncrement = 0;
 
@@ -46,28 +44,44 @@ export class OtherCar {
 const enemyCarImage = [enemyCar1, enemyCar2, enemyCar3, enemyCar4]
 
 let enemyCarArray: OtherCar[] = []
-const carposition = [-30, 50, 100, 160, 220, 280, 350, 410]
+const carposition = [-30, 70, 140, 200, 290, 380]
+const carYposition = [-600, -480, -360, -180, -60]
 
-export function DrawEnemyCar() {
 
-    for (let i = 0; i < 7; i++) {
+// to  shuffleArray
+function shuffleArray(array: number[]) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+export function drawEnemyCar() {
+
+    const shuffledYPositions = shuffleArray(carYposition.slice());
+    console.log(shuffledYPositions)
+
+    const numLanes = carposition.length;
+
+    for (let i = 0; i < numLanes; i++) {
         const randomImage = enemyCarImage[Math.floor(Math.random() * enemyCarImage.length)];
-        const randomPositon = carposition[Math.floor(Math.random() * carposition.length)];
-        const yposition = random(-800, 200)
+        const randomPositon = carposition[i];
+        const randomYPositon = shuffledYPositions[i % shuffledYPositions.length];
+
         let eCar = new OtherCar(
             randomImage,
             randomPositon,
-            yposition,
+            randomYPositon,
             carWidth,
             carHeight
-        )
+        );
         enemyCarArray.push(eCar);
     }
 }
 
 
-
-DrawEnemyCar()
+drawEnemyCar()
 
 // highest score 
 export let highestScore: number = 0;
@@ -76,9 +90,8 @@ if (storedHighestScore) {
     highestScore = parseInt(storedHighestScore, 10);
 }
 
-
 //  enemy car function 
-export function EnemyCar() {
+export function enemyCar() {
 
     const firstSpeed = 10
     const secondSpeed = 30
@@ -102,15 +115,20 @@ export function EnemyCar() {
     }
     for (let i = 0; i < enemyCarArray.length; i++) {
         let singleEnemy = enemyCarArray[i]
-        const randomPositon = carposition[Math.floor(Math.random() * carposition.length)];
+
+        const shuffledYPositions = shuffleArray(carYposition.slice());
+        const numLanes = carposition.length;
+        const numYPositions = shuffledYPositions.length;
+
+        const randomPositon = carposition[i % numLanes];
+        const randomYPositon = shuffledYPositions[i % numYPositions];
         singleEnemy.drawCar()
         singleEnemy.updateCar()
+
         if (singleEnemy.y > canvasHeight) {
-            singleEnemy.y = random(-600, 0)
+            singleEnemy.y = randomYPositon
             singleEnemy.x = randomPositon
             score.score += 1
-
-
 
             if (score.score > highestScore) {
                 highestScore = score.score;
@@ -123,15 +141,9 @@ export function EnemyCar() {
     }
 }
 
-
-
 // rectangle collision
-// a = your car
-// b = enemy car
-
-// because image width is more to make perfect collision 
-
-
+// a is my car
+// b is enemy car
 
 function detectCollision(a: Car, b: OtherCar) {
     return a.x < b.x + b.width - ignoreNumber &&
@@ -139,3 +151,4 @@ function detectCollision(a: Car, b: OtherCar) {
         a.y < b.y + b.height - ignoreNumber &&
         a.y + a.height - ignoreNumber > b.y;
 }
+

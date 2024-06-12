@@ -20,7 +20,7 @@ export class Car {
         this.height = height;
     }
 
-    DrawCar() {
+    drawCar() {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
 
     }
@@ -29,6 +29,7 @@ export class Car {
 }
 
 export let myCar = new Car(userCar, carX.carx, carY, carWidth, carHeight)
+
 let left: boolean, right: boolean = false;
 
 

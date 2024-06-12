@@ -20,7 +20,6 @@ export let roadWidth: number = 20;
 export let roadHeight: number = 50;
 export let roadVy: number = 3;
 
-
 // export let gameOver: boolean = false
 export const gameData = {
     gameOver: false
@@ -30,4 +29,6 @@ export const score = {
     score: 0
 }
 
+
+// this is  because image width is more to make perfect collision 
 export const ignoreNumber: number = 68
