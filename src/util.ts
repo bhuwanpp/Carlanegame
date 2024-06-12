@@ -30,3 +30,4 @@ export const score = {
     score: 0
 }
 
+export const ignoreNumber: number = 68

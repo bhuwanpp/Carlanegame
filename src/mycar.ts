@@ -1,7 +1,6 @@
 import { ctx, canvas, } from "./main";
 import { carX, carY, carWidth, carHeight } from "./util";
 
-
 export class Car {
     img: HTMLImageElement;
     x: number;
@@ -54,12 +53,13 @@ function release(e: KeyboardEvent) {
     }
 }
 
+const sideNumber = 40
 export function gameLoop() {
-    if (left && carX.carx > 0) {
-        carX.carx = carX.carx - 5;
+    if (left && carX.carx > - sideNumber) {
+        carX.carx = carX.carx - 4;
     }
-    if (right && carX.carx < canvas.width - myCar.width) {
-        carX.carx = carX.carx + 5;
+    if (right && carX.carx < canvas.width - myCar.width + sideNumber) {
+        carX.carx = carX.carx + 4
     }
     myCar.x = carX.carx;
 }

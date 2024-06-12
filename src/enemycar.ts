@@ -1,8 +1,7 @@
 import { ctx } from "./main";
-import { carWidth, carHeight, gameData, canvasWidth, canvasHeight, score } from "./util";
+import { carWidth, carHeight, ignoreNumber, canvasHeight, score } from "./util";
 import { random } from "./main";
-import { myCar, Car } from "./mycar";
-
+import { Car } from "./mycar";
 
 let enemyCar1 = new Image();
 enemyCar1.src = "./images/Audi.png";
@@ -47,7 +46,7 @@ export class OtherCar {
 const enemyCarImage = [enemyCar1, enemyCar2, enemyCar3, enemyCar4]
 
 let enemyCarArray: OtherCar[] = []
-const carposition = [0, 100, 250, 400]
+const carposition = [-30, 50, 100, 160, 220, 280, 350, 410]
 
 export function DrawEnemyCar() {
 
@@ -111,15 +110,16 @@ export function EnemyCar() {
             singleEnemy.x = randomPositon
             score.score += 1
 
+
+
             if (score.score > highestScore) {
                 highestScore = score.score;
                 localStorage.setItem('highestScore', highestScore.toString());
             }
-
         }
-        if (detectCollision(myCar, singleEnemy)) {
-            gameData.gameOver = true;
-        }
+        // if (detectCollision(myCar, singleEnemy)) {
+        //     gameData.gameOver = true;
+        // }
     }
 }
 
@@ -130,7 +130,7 @@ export function EnemyCar() {
 // b = enemy car
 
 // because image width is more to make perfect collision 
-const ignoreNumber: number = 70
+
 
 
 function detectCollision(a: Car, b: OtherCar) {

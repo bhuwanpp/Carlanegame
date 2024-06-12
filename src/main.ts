@@ -11,8 +11,8 @@ const gameStartAudio = new Audio(audio) as HTMLAudioElement
 export const canvas = document.getElementById('canvas') as HTMLCanvasElement
 export const ctx = canvas.getContext('2d')!
 
-export function random(max: number, min: number) {
-    let num = Math.floor(Math.random() * (max - min) + min)
+export function random(max: number, min: number): number {
+    let num: number = Math.floor(Math.random() * (max - min) + min)
     return num
 }
 
@@ -21,7 +21,7 @@ let animationId: number;
 function allUpdate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-    // if gameover : false only works 
+    // if gameOver : false only works 
     if (!gameData.gameOver) {
         requestAnimationFrame(allUpdate);
     }
@@ -78,6 +78,10 @@ function StartGame() {
             ctx.clearRect(0, 0, canvas.width, canvas.height)
             animationId = requestAnimationFrame(allUpdate)
             gameStartAudio.play();
+            gameStartAudio.addEventListener("ended", function () {
+                gameStartAudio.play()
+
+            });
         }
     })
 
