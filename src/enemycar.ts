@@ -1,7 +1,7 @@
 import { ctx } from "./main";
-import { carWidth, carHeight, ignoreNumber, canvasHeight, score } from "./util";
+import { carWidth, gameData, carHeight, ignoreNumber, canvasHeight, score } from "./util";
 import { random } from "./main";
-import { Car } from "./mycar";
+import { Car, myCar } from "./mycar";
 
 let enemyCar1 = new Image();
 enemyCar1.src = "./images/Audi.png";
@@ -117,9 +117,9 @@ export function EnemyCar() {
                 localStorage.setItem('highestScore', highestScore.toString());
             }
         }
-        // if (detectCollision(myCar, singleEnemy)) {
-        //     gameData.gameOver = true;
-        // }
+        if (detectCollision(myCar, singleEnemy)) {
+            gameData.gameOver = true;
+        }
     }
 }
 
