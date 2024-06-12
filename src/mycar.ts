@@ -1,6 +1,10 @@
 import { ctx, canvas, } from "./main";
 import { carX, carY, carWidth, carHeight } from "./util";
 
+let userCar = new Image();
+userCar.src = "./images/Police.png";
+userCar.style.border = '10px solid red'
+
 export class Car {
     img: HTMLImageElement;
     x: number;
@@ -18,15 +22,11 @@ export class Car {
 
     DrawCar() {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+
     }
 
 
 }
-
-let userCar = new Image(-500, -500);
-userCar.src = "./images/Police.png";
-userCar.style.border = '10px solid red'
-
 
 export let myCar = new Car(userCar, carX.carx, carY, carWidth, carHeight)
 let left: boolean, right: boolean = false;

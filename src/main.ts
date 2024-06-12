@@ -26,8 +26,8 @@ function allUpdate() {
         requestAnimationFrame(allUpdate);
     }
 
-    ctx.font = '20px serif'
-    ctx.fillText(`${score.score}`, 10, 20)
+    ctx.font = '24px Tiny5'
+    ctx.fillText(`Score ${score.score}`, 10, 20)
 
     updateRoad()
     myCar.DrawCar()
@@ -56,7 +56,7 @@ function gameOverText() {
     if (gameData.gameOver) {
         myCar.y = 100
         ctx.fillStyle = 'red'
-        ctx.font = '50px serif'
+        ctx.font = '50px Tiny5'
         ctx.fillText('GAME OVER', 100, canvas.height / 2)
         ctx.font = '20px serif'
         ctx.fillText(`your Score ${score.score} `, 100, canvas.height / 2 + 40)
@@ -69,7 +69,7 @@ function gameOverText() {
 
 function StartGame() {
     ctx.fillStyle = 'red'
-    ctx.font = '30px serif'
+    ctx.font = '30px Tiny5'
     ctx.fillText('Start Your game', 100, canvas.height / 2)
     ctx.fillText('Press Enter to Start', 100, canvas.height / 2 + 50)
 
